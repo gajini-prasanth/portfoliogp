@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Gajini Prasanth G | Portfolio</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #121212;
+      color: #fff;
+      display: flex;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .left {
+      width: 50%;
+      background: linear-gradient(135deg, #1f1c2c, #928dab);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .left img {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      border: 3px solid #fff;
+      margin-bottom: 1rem;
+      box-shadow: 0 0 10px #fff;
+    }
+
+    .left h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: #00ffe0;
+    }
+
+    .left p {
+      font-size: 1.1rem;
+      line-height: 1.5;
+      color: #eee;
+    }
+
+    .right {
+      width: 50%;
+      padding: 4rem 2rem;
+      overflow-y: auto;
+    }
+
+    .nav {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .nav button {
+      padding: 1rem;
+      font-size: 1.1rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      background: #00ffe0;
+      color: #000;
+      font-weight: bold;
+      transition: background 0.3s ease;
+    }
+
+    .nav button:hover {
+      background: #ff00c8;
+      color: #fff;
+    }
+
+    .section {
+      display: none;
+      margin-top: 2rem;
+      animation: fadeIn 0.6s ease;
+    }
+
+    .section.active { display: block; }
+
+    .section h2 {
+      color: #ff00c8;
+      margin-bottom: 1rem;
+      font-size: 1.5rem;
+    }
+
+    .section p {
+      font-size: 1rem;
+      line-height: 1.6;
+      color: #ccc;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="left">
+    <img src="gajini.jpeg" alt="Gajini Prasanth G">
+    <h1>Gajini Prasanth G</h1>
+    <p>CS Engineer @ ESEC (2023–2027)<br>
+    Passion for Java, Web Dev, Cloud, AI</p>
+  </div>
+
+  <div class="right">
+    <div class="nav">
+      <button onclick="showSection('education')">🎓 Education</button>
+      <button onclick="showSection('internship')">💼 Internship</button>
+      <button onclick="showSection('skills')">🛠️ Skills and Achievement</button>
+      <button onclick="showSection('certs')">📜 Certifications</button>
+      <button onclick="showSection('contact')">📞 Contact</button>
+    </div>
+
+    <div class="section" id="education">
+      <h2>Education</h2>
+      <p>B.E in Computer Science & Engineering<br>
+      Erode Sengunthar Engineering College (2023–2027)<br>
+        Java,DSA, Web Dev, AI, Cloud, SQL</p>
+    </div>
+
+    <div class="section" id="internship">
+      <h2>Internship</h2>
+      <p><strong>NEXUS</strong> (Dec 2023 – Mar 2024)<br>
+      • Data Analysis<br>• Project Coordination<br>• Stakeholder Communication</p>
+    </div>
+
+    <div class="section" id="skills">
+      <h2>Skills</h2>
+      <p>Java · CSS · ChatGPT Search · HTML · Cloud<br>
+ <h2>Achievement</h2>
+     Hosted a Webpage Of Love · Java Number Game</p>
+    </div>
+
+    <div class="section" id="certs">
+      <h2>Certifications</h2>
+      <p>• Cybersecurity – Skill India<br>
+      • Java Basics – HackerRank<br>
+      • ChatGPT Search – LinkedIn Learning<br>
+      • AWS ML Prep – LinkedIn Learning<br>
+      • AWS Cloud Practitioner Essentials - AWS Training<br>
+      • Getting Started with AWS Storage - AWS Training</p>
+    </div>
+
+    <div class="section" id="contact">
+      <h2>Contact</h2>
+      <p>Email: <a href="mailto:gajiniprasanth291@gmail.com">gajiniprasanth291@gmail.com</a><br>
+      Phone: <a href="tel:+91918344458720">+91 8344458720</a><br>
+      LinkedIn: <a href="https://www.linkedin.com/in/gajini-prasanth-8285ba2a3/">www.linkedin.com/in/gajini-prasanth-8285ba2a3</a><br>
+Git Hub: <a href="https://github.com/gajini-prasanth">https://github.com/gajini-prasanth</a></p>
+    </div>
+  </div>
+
+  <script>
+    function showSection(id) {
+      document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
+      const target = document.getElementById(id);
+      if (target) target.classList.add('active');
+    }
+  </script>
+
+</body>
+</html>
