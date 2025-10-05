@@ -1,171 +1,392 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Gajini Prasanth G | Portfolio</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Gajini Prasanth G — Portfolio</title>
+  <meta name="description" content="Portfolio of Gajini Prasanth — CS Engineer | Java, Web Dev, Cloud, AI" />
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background: #121212;
-      color: #fff;
-      display: flex;
-      height: 100vh;
-      overflow: hidden;
+    :root{
+      --bg:#0b0c10;
+      --panel:#0f1720;
+      --accent1:#7af3d9;
+      --accent2:#ff4bd1;
+      --muted:#9aa3b2;
+      --glass: rgba(255,255,255,0.04);
+      --card-shadow: 0 8px 30px rgba(0,0,0,0.6);
     }
 
-    .left {
-      width: 50%;
-      background: linear-gradient(135deg, #1f1c2c, #928dab);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 2rem;
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%}
+    body{
+      font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: radial-gradient(1200px 400px at 10% 10%, rgba(122,243,217,0.03), transparent),
+                  linear-gradient(180deg, #060708 0%, var(--bg) 100%);
+      color:#e6eef6;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.45;
+      padding:32px;
     }
 
-    .left img {
-      width: 160px;
-      height: 160px;
-      border-radius: 50%;
-      border: 3px solid #fff;
-      margin-bottom: 1rem;
-      box-shadow: 0 0 10px #fff;
+    .container{
+      max-width:1100px;
+      margin:0 auto;
+      display:grid;
+      grid-template-columns: 360px 1fr;
+      gap:28px;
+      min-height: calc(100vh - 64px);
+      align-items:start;
     }
 
-    .left h1 {
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
-      color: #00ffe0;
+    /* SIDEBAR */
+    .sidebar{
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.015));
+      border: 1px solid rgba(255,255,255,0.03);
+      border-radius:16px;
+      padding:28px;
+      box-shadow: var(--card-shadow);
+      position:sticky;
+      top:32px;
+      height: calc(100vh - 64px);
+      overflow:auto;
+      backdrop-filter: blur(6px);
     }
 
-    .left p {
-      font-size: 1.1rem;
-      line-height: 1.5;
-      color: #eee;
+    .avatar{
+      width:130px;height:130px;border-radius:50%;
+      display:block;margin:0 auto 16px;
+      object-fit:cover;border:3px solid rgba(255,255,255,0.06);
+      box-shadow: 0 6px 20px rgba(122,243,217,0.06);
     }
 
-    .right {
-      width: 50%;
-      padding: 4rem 2rem;
-      overflow-y: auto;
+    h1.name{font-size:1.4rem;text-align:center;color:var(--accent1);margin-bottom:6px; font-weight:700}
+    p.headline{text-align:center;color:var(--muted);font-size:0.95rem;margin-bottom:18px}
+
+    .contact{
+      margin-top:6px;font-size:0.95rem;color:#cfeff1;
+    }
+    .contact a{color:var(--accent1);text-decoration:none;word-break:break-word}
+    .links{display:flex;gap:8px;justify-content:center;margin-top:12px}
+    .chip{
+      padding:8px 12px;border-radius:999px;background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border:1px solid rgba(255,255,255,0.02);font-weight:600;font-size:0.85rem;color:var(--muted)
     }
 
-    .nav {
-      display: grid;
-      gap: 1rem;
+    .side-block{margin-top:22px}
+    .side-block h3{font-size:0.9rem;color:var(--accent2);margin-bottom:8px}
+    .skill-list{display:flex;flex-wrap:wrap;gap:8px}
+    .skill{background:var(--glass);padding:8px 10px;border-radius:8px;font-weight:600;color:#d5f9ee;font-size:0.85rem}
+
+    .download-resume{
+      display:block;margin:18px auto 0;padding:10px 18px;border-radius:10px;border:none;background:linear-gradient(90deg,var(--accent1),var(--accent2));
+      color:#07101a;font-weight:700;text-align:center;text-decoration:none;width:100%;
+      box-shadow: 0 8px 24px rgba(122,243,217,0.08);
     }
 
-    .nav button {
-      padding: 1rem;
-      font-size: 1.1rem;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      background: #00ffe0;
-      color: #000;
-      font-weight: bold;
-      transition: background 0.3s ease;
+    /* MAIN CONTENT */
+    .main{
+      background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.015));
+      border-radius:16px;padding:28px;border:1px solid rgba(255,255,255,0.03);
+      box-shadow: var(--card-shadow);
+      height: calc(100vh - 64px);
+      overflow:auto;
+      backdrop-filter: blur(4px);
     }
 
-    .nav button:hover {
-      background: #ff00c8;
-      color: #fff;
+    .top-row{display:flex;justify-content:space-between;align-items:center;gap:12px}
+    .title{font-size:1.25rem;color:var(--accent1);font-weight:800}
+    .subtitle{color:var(--muted);font-weight:600;font-size:0.95rem}
+
+    /* nav / quick buttons */
+    .nav{
+      display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;
     }
-
-    .section {
-      display: none;
-      margin-top: 2rem;
-      animation: fadeIn 0.6s ease;
+    .nav button{
+      background:transparent;border:1px solid rgba(255,255,255,0.03);padding:8px 12px;border-radius:10px;color:var(--muted);
+      cursor:pointer;font-weight:700;font-size:0.85rem;
     }
+    .nav button.active{background:linear-gradient(90deg,var(--accent1),var(--accent2));color:#07101a;border:none;box-shadow:0 10px 30px rgba(255,75,209,0.06)}
 
-    .section.active { display: block; }
+    section.block{margin-top:22px;padding:18px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005)); border:1px solid rgba(255,255,255,0.02)}
+    section.block h2{color:var(--accent2);font-size:1.05rem;margin-bottom:10px}
+    .muted{color:var(--muted);font-size:0.95rem}
 
-    .section h2 {
-      color: #ff00c8;
-      margin-bottom: 1rem;
-      font-size: 1.5rem;
+    /* Experience / Education rows */
+    .row{display:flex;justify-content:space-between;gap:12px}
+    .left-col{max-width:68%}
+    .meta{color:var(--muted);font-size:0.9rem;margin-bottom:6px}
+    .project-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:12px}
+    .project{
+      padding:12px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.008), rgba(255,255,255,0.004));
+      border:1px solid rgba(255,255,255,0.02);
     }
+    .project h3{font-size:1rem;margin-bottom:6px;color:var(--accent1)}
+    .project p{color:#d1eaf0;font-size:0.9rem;margin-bottom:8px}
 
-    .section p {
-      font-size: 1rem;
-      line-height: 1.6;
-      color: #ccc;
-    }
+    .badge{display:inline-block;padding:6px 8px;border-radius:8px;background:rgba(255,255,255,0.02);color:var(--muted);font-weight:700;font-size:0.78rem;margin-right:8px}
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
+    .cert-list{display:flex;flex-direction:column;gap:8px}
+    .cert{padding:10px;border-radius:8px;border:1px dashed rgba(255,255,255,0.02);color:#dff7ee;font-weight:600}
+
+    .footer-note{margin-top:18px;color:var(--muted);font-size:0.9rem;text-align:center}
+
+    /* responsive */
+    @media (max-width:980px){
+      .container{grid-template-columns:1fr; padding:14px; gap:18px}
+      .sidebar{position:relative;height:auto;top:0}
+      .main{height:auto}
     }
   </style>
 </head>
 <body>
+  <div class="container" role="main">
+    <!-- SIDEBAR -->
+    <aside class="sidebar" aria-labelledby="profile-name">
+      <img src="gajini.jpeg" alt="Gajini Prasanth" class="avatar" onerror="this.src='https://via.placeholder.com/130?text=GP'"/>
+      <h1 id="profile-name" class="name">Gajini Prasanth G</h1>
+      <p class="headline">B.E Computer Science & Engineering (2023–2027) — Java • Web • Cloud • AI</p>
 
-  <div class="left">
-    <img src="gajini.jpeg" alt="Gajini Prasanth G">
-    <h1>Gajini Prasanth G</h1>
-    <p>CS Engineer @ ESEC (2023–2027)<br>
-    Passion for Java, Web Dev, Cloud, AI</p>
-  </div>
+      <div class="contact" aria-label="Contact info">
+        <div><strong>Email:</strong> <a href="mailto:gajiniprasanth291@gmail.com">gajiniprasanth291@gmail.com</a></div>
+        <div style="margin-top:6px"><strong>Phone:</strong> <a href="tel:+918344458720">+91 8344458720</a></div>
+        <div style="margin-top:6px"><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/gajini-prasanth-8285ba2a3/" target="_blank" rel="noopener">gajini-prasanth</a></div>
+        <div style="margin-top:6px"><strong>GitHub:</strong> <a href="https://github.com/gajini-prasanth" target="_blank" rel="noopener">gajini-prasanth</a></div>
+      </div>
 
-  <div class="right">
-    <div class="nav">
-      <button onclick="showSection('education')">🎓 Education</button>
-      <button onclick="showSection('internship')">💼 Internship</button>
-      <button onclick="showSection('skills')">🛠️ Skills and Achievement</button>
-      <button onclick="showSection('certs')">📜 Certifications</button>
-      <button onclick="showSection('contact')">📞 Contact</button>
-    </div>
+      <div class="links" aria-hidden="false" style="margin-top:12px">
+        <div class="chip">Java</div>
+        <div class="chip">HTML & CSS</div>
+        <div class="chip">Cloud</div>
+      </div>
 
-    <div class="section" id="education">
-      <h2>Education</h2>
-      <p>B.E in Computer Science & Engineering<br>
-      Erode Sengunthar Engineering College (2023–2027)<br>
-        Java,DSA, Web Dev, AI, Cloud, SQL</p>
-    </div>
+      <a class="download-resume" href="resume.pdf" download>Download Resume (PDF)</a>
 
-    <div class="section" id="internship">
-      <h2>Internship</h2>
-      <p><strong>NEXUS</strong> (Dec 2023 – Mar 2024)<br>
-      • Data Analysis<br>• Project Coordination<br>• Stakeholder Communication</p>
-    </div>
+      <div class="side-block">
+        <h3>Skills</h3>
+        <div class="skill-list" aria-hidden="false">
+          <span class="skill">Java</span>
+          <span class="skill">HTML</span>
+          <span class="skill">CSS</span>
+          <span class="skill">Cloud (AWS)</span>
+          <span class="skill">Content Creation</span>
+          <span class="skill">Databases</span>
+        </div>
+      </div>
 
-    <div class="section" id="skills">
-      <h2>Skills</h2>
-      <p>Java · CSS · ChatGPT Search · HTML · Cloud<br>
- <h2>Achievement</h2>
-     Hosted a Webpage Of Love · Java Number Game</p>
-    </div>
+      <div class="side-block">
+        <h3>Certifications</h3>
+        <div class="cert-list">
+          <div class="cert">AWS Cloud Practitioner (AWS Training)</div>
+          <div class="cert">Java Basics (HackerRank)</div>
+          <div class="cert">Program in Cybersecurity (Skill India)</div>
+          <div class="cert">ChatGPT Search (LinkedIn Learning)</div>
+        </div>
+      </div>
 
-    <div class="section" id="certs">
-      <h2>Certifications</h2>
-      <p>• Cybersecurity – Skill India<br>
-      • Java Basics – HackerRank<br>
-      • ChatGPT Search – LinkedIn Learning<br>
-      • AWS ML Prep – LinkedIn Learning<br>
-      • AWS Cloud Practitioner Essentials - AWS Training<br>
-      • Getting Started with AWS Storage - AWS Training</p>
-    </div>
+      <div class="footer-note" style="margin-top:18px">
+        Available for internships & junior roles. Open to remote opportunities.
+      </div>
+    </aside>
 
-    <div class="section" id="contact">
-      <h2>Contact</h2>
-      <p>Email: <a href="mailto:gajiniprasanth291@gmail.com">gajiniprasanth291@gmail.com</a><br>
-      Phone: <a href="tel:+91918344458720">+91 8344458720</a><br>
-      LinkedIn: <a href="https://www.linkedin.com/in/gajini-prasanth-8285ba2a3/">www.linkedin.com/in/gajini-prasanth-8285ba2a3</a><br>
-Git Hub: <a href="https://github.com/gajini-prasanth">https://github.com/gajini-prasanth</a></p>
-    </div>
+    <!-- MAIN -->
+    <main class="main" aria-labelledby="main-title">
+      <div class="top-row">
+        <div>
+          <div class="title" id="main-title">Hello — I'm Gajini</div>
+          <div class="subtitle">CS Engineer • Java & Web Developer • Cloud Enthusiast</div>
+        </div>
+
+        <div style="text-align:right">
+          <small class="muted">Based in India • Graduating 2027</small>
+        </div>
+      </div>
+
+      <nav class="nav" aria-label="quick nav">
+        <button class="active" data-target="about">About</button>
+        <button data-target="experience">Experience</button>
+        <button data-target="projects">Projects</button>
+        <button data-target="education">Education</button>
+        <button data-target="skills">Skills</button>
+        <button data-target="contact">Contact</button>
+      </nav>
+
+      <!-- ABOUT -->
+      <section id="about" class="block" aria-labelledby="about-heading">
+        <h2 id="about-heading">About</h2>
+        <p class="muted">
+          I'm a motivated Computer Science & Engineering student at Erode Sengunthar Engineering College (B.E — 2023–2027).
+          I enjoy building web projects, solving problems with Java, exploring cloud technologies (AWS), and creating AI-powered experiences.
+          I'm seeking internships or entry-level roles in software development, testing, and cloud engineering.
+        </p>
+      </section>
+
+      <!-- EXPERIENCE -->
+      <section id="experience" class="block" aria-labelledby="exp-heading" hidden>
+        <h2 id="exp-heading">Experience & Internships</h2>
+
+        <div class="row" style="margin-top:6px">
+          <div class="left-col">
+            <div class="meta"><strong>Graphic Designer (Intern)</strong> — YHills Edutech Pvt Ltd</div>
+            <div class="muted">Jun 2025 – Aug 2025</div>
+            <p style="margin-top:8px" class="muted">Created visual concepts, collaborated with marketing, produced graphics for websites and product illustrations.</p>
+          </div>
+          <div style="text-align:right;color:var(--muted)">Internship</div>
+        </div>
+
+        <hr style="margin:12px 0;border:none;border-top:1px solid rgba(255,255,255,0.02)">
+
+        <div class="row" style="margin-top:6px">
+          <div class="left-col">
+            <div class="meta"><strong>Intern</strong> — NEXUS</div>
+            <div class="muted">Dec 2023 – Mar 2024</div>
+            <p style="margin-top:8px" class="muted">Assisted in data analysis, reporting, project coordination and stakeholder communication.</p>
+          </div>
+          <div style="text-align:right;color:var(--muted)">Internship</div>
+        </div>
+      </section>
+
+      <!-- PROJECTS -->
+      <section id="projects" class="block" aria-labelledby="projects-heading" hidden>
+        <h2 id="projects-heading">Projects</h2>
+
+        <div class="project-grid">
+          <div class="project">
+            <h3>NATPU-AI-CHAT</h3>
+            <div class="meta">Friendship chatbot — deployed on Netlify</div>
+            <p>Empathy-focused chatbot with a clean UI/UX. Hosted for fast performance and community feedback.</p>
+            <div>
+              <a class="badge" href="https://github.com/gajini-prasanth/NATPU-AI-CHAT" target="_blank" rel="noopener">Source</a>
+            </div>
+          </div>
+
+          <div class="project">
+            <h3>Number Guess Game (Java)</h3>
+            <div class="meta">Java • Object Oriented Programming</div>
+            <p>Interactive number-guessing game implementing game flow and robust logic for smooth UX.</p>
+            <div><span class="badge">Java</span></div>
+          </div>
+
+          <div class="project">
+            <h3>Bridhunas-LC Website</h3>
+            <div class="meta">Aug 2025 – Oct 2025 — Hosted on Netlify</div>
+            <p>Built and launched a community website. Focus on responsive design and accessibility.</p>
+            <div>
+              <a class="badge" href="https://bridhunaslc.netlify.app/" target="_blank" rel="noopener">Live</a>
+            </div>
+          </div>
+
+          <div class="project">
+            <h3>Do You Love Me (Engagement Campaign)</h3>
+            <div class="meta">Social media campaign</div>
+            <p>Designed contests and polls to increase community interaction; achieved ~25% engagement uplift in first month.</p>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- EDUCATION -->
+      <section id="education" class="block" aria-labelledby="edu-heading" hidden>
+        <h2 id="edu-heading">Education</h2>
+        <div class="meta"><strong>B.E. — Computer Science & Engineering</strong> — Erode Sengunthar Engineering College</div>
+        <div class="muted">2023 – 2027 (expected)</div>
+        <p style="margin-top:8px" class="muted">Relevant coursework and interests: Data Structures & Algorithms, Web Development, Cloud Computing (AWS), Artificial Intelligence, Databases.</p>
+      </section>
+
+      <!-- SKILLS -->
+      <section id="skills" class="block" aria-labelledby="skills-heading" hidden>
+        <h2 id="skills-heading">Skills & Interested Areas</h2>
+        <div style="display:flex;gap:12px;flex-wrap:wrap">
+          <div style="min-width:220px">
+            <h4 style="color:var(--accent1);margin-bottom:8px">Languages & Web</h4>
+            <div class="muted">Java · HTML · CSS · JavaScript (basic)</div>
+          </div>
+
+          <div style="min-width:220px">
+            <h4 style="color:var(--accent1);margin-bottom:8px">Cloud & Tools</h4>
+            <div class="muted">AWS (Cloud Practitioner), Netlify, GitHub</div>
+          </div>
+
+          <div style="min-width:220px">
+            <h4 style="color:var(--accent1);margin-bottom:8px">Testing & QA</h4>
+            <div class="muted">Interested in Software Testing, Automation (Selenium), JIRA</div>
+          </div>
+        </div>
+
+        <div style="margin-top:12px">
+          <h4 style="color:var(--accent2);margin-bottom:8px">Achievements</h4>
+          <ul class="muted" style="margin-left:18px">
+            <li>Developed and deployed NATPU_AI chatbot.</li>
+            <li>Completed AWS Cloud Practitioner Essentials.</li>
+            <li>Java Basics certification (HackerRank).</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- CONTACT -->
+      <section id="contact" class="block" aria-labelledby="contact-heading" hidden>
+        <h2 id="contact-heading">Contact & Connect</h2>
+        <p class="muted">Let's connect — open to internships, freelance, and junior developer roles.</p>
+
+        <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:12px">
+          <a class="badge" href="mailto:gajiniprasanth291@gmail.com">Email Me</a>
+          <a class="badge" href="tel:+918344458720">Call</a>
+          <a class="badge" href="https://www.linkedin.com/in/gajini-prasanth-8285ba2a3/" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
+
+        <p style="margin-top:14px" class="muted">Direct links:</p>
+        <div class="muted" style="margin-top:6px">
+          <div><strong>Portfolio:</strong> <a href="https://gajiniprasanth-esec.netlify.app/" target="_blank" rel="noopener">gajiniprasanth-esec.netlify.app</a></div>
+          <div style="margin-top:6px"><strong>Number Game:</strong> <a href="https://numbergame-gp1.netlify.app/" target="_blank" rel="noopener">numbergame-gp1.netlify.app</a></div>
+        </div>
+      </section>
+
+    </main>
   </div>
 
   <script>
-    function showSection(id) {
-      document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
-      const target = document.getElementById(id);
-      if (target) target.classList.add('active');
-    }
-  </script>
+    // Simple tab-like navigation
+    (function(){
+      const navBtns = document.querySelectorAll('.nav button');
+      const blocks = {
+        about: document.getElementById('about'),
+        experience: document.getElementById('experience'),
+        projects: document.getElementById('projects'),
+        education: document.getElementById('education'),
+        skills: document.getElementById('skills'),
+        contact: document.getElementById('contact')
+      };
 
+      function show(key){
+        // hide all
+        Object.values(blocks).forEach(b => b.hidden = true);
+        // show target
+        if(blocks[key]) blocks[key].hidden = false;
+        // active button
+        navBtns.forEach(b => b.classList.toggle('active', b.dataset.target === key));
+        // scroll top of main content for mobile
+        document.querySelector('.main').scrollTo({top:0,behavior:'smooth'});
+      }
+
+      navBtns.forEach(btn => {
+        btn.addEventListener('click', () => show(btn.dataset.target));
+      });
+
+      // default
+      show('about');
+
+      // keyboard navigation (1-6)
+      window.addEventListener('keydown', (e) => {
+        if(e.key >= '1' && e.key <= '6'){
+          const idx = parseInt(e.key,10) - 1;
+          if(navBtns[idx]) navBtns[idx].click();
+        }
+      });
+    })();
+  </script>
 </body>
 </html>
