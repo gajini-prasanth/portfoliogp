@@ -135,6 +135,35 @@
 
     .footer-note{margin-top:18px;color:var(--muted);font-size:0.9rem;text-align:center}
 
+    /* Search Styles */
+    .search-container{margin-top:18px}
+    .search-input{
+      width:100%;padding:12px 16px;border-radius:10px;border:1px solid rgba(255,255,255,0.08);
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      color:#e6eef6;font-size:0.95rem;font-family:inherit;
+      backdrop-filter:blur(4px);box-shadow:0 4px 12px rgba(0,0,0,0.1);
+      transition:border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    .search-input:focus{
+      outline:none;border-color:var(--accent1);
+      box-shadow:0 0 0 2px rgba(122,243,217,0.1), 0 4px 16px rgba(0,0,0,0.15);
+    }
+    .search-input::placeholder{color:var(--muted)}
+    .search-results{
+      margin-top:12px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.015), rgba(255,255,255,0.01));
+      border:1px solid rgba(255,255,255,0.02);backdrop-filter:blur(6px);max-height:300px;overflow-y:auto;
+    }
+    .search-result-item{
+      padding:12px 16px;border-bottom:1px solid rgba(255,255,255,0.02);cursor:pointer;
+      transition:background 0.15s ease;
+    }
+    .search-result-item:last-child{border-bottom:none}
+    .search-result-item:hover{background:rgba(122,243,217,0.03)}
+    .search-result-title{color:var(--accent1);font-weight:600;font-size:0.95rem;margin-bottom:4px}
+    .search-result-content{color:var(--muted);font-size:0.85rem;line-height:1.4}
+    .search-result-section{color:var(--accent2);font-size:0.8rem;font-weight:600;margin-top:4px}
+    .search-highlight{background:rgba(255,75,209,0.15);color:var(--accent2);padding:1px 3px;border-radius:3px}
+
     /* responsive */
     @media (max-width:980px){
       .container{grid-template-columns:1fr; padding:14px; gap:18px}
@@ -204,6 +233,11 @@
         <div style="text-align:right">
           <small class="muted">Based in India • Graduating 2027</small>
         </div>
+      </div>
+
+      <div class="search-container">
+        <input type="text" id="search-input" placeholder="Search portfolio content..." class="search-input" />
+        <div id="search-results" class="search-results" hidden></div>
       </div>
 
       <nav class="nav" aria-label="quick nav">
@@ -349,6 +383,172 @@
   </div>
 
   <script>
+    // Search functionality
+    (function(){
+      const searchInput = document.getElementById('search-input');
+      const searchResults = document.getElementById('search-results');
+      
+      // Define searchable content with section mappings
+      const searchableContent = [
+        {
+          section: 'about',
+          title: 'About Gajini Prasanth',
+          content: 'motivated Computer Science Engineering student Erode Sengunthar Engineering College B.E 2023 2027 building web projects solving problems Java exploring cloud technologies AWS creating AI-powered experiences seeking internships entry-level roles software development testing cloud engineering'
+        },
+        {
+          section: 'experience', 
+          title: 'Graphic Designer Intern at YHills Edutech',
+          content: 'YHills Edutech Pvt Ltd Jun 2025 Aug 2025 Created visual concepts collaborated marketing produced graphics websites product illustrations internship'
+        },
+        {
+          section: 'experience',
+          title: 'Intern at NEXUS',
+          content: 'NEXUS Dec 2023 Mar 2024 Assisted data analysis reporting project coordination stakeholder communication internship'
+        },
+        {
+          section: 'projects',
+          title: 'NATPU-AI-CHAT Project',
+          content: 'Friendship chatbot deployed Netlify Empathy-focused chatbot clean UI UX Hosted fast performance community feedback GitHub source'
+        },
+        {
+          section: 'projects',
+          title: 'Number Guess Game Java',
+          content: 'Java Object Oriented Programming Interactive number-guessing game implementing game flow robust logic smooth UX'
+        },
+        {
+          section: 'projects',
+          title: 'Bridhunas-LC Website',
+          content: 'Aug 2025 Oct 2025 Hosted Netlify Built launched community website Focus responsive design accessibility live'
+        },
+        {
+          section: 'projects',
+          title: 'Do You Love Me Engagement Campaign',
+          content: 'Social media campaign Designed contests polls increase community interaction achieved 25% engagement uplift first month'
+        },
+        {
+          section: 'education',
+          title: 'Computer Science & Engineering Degree',
+          content: 'B.E Computer Science Engineering Erode Sengunthar Engineering College 2023 2027 expected Relevant coursework interests Data Structures Algorithms Web Development Cloud Computing AWS Artificial Intelligence Databases'
+        },
+        {
+          section: 'skills',
+          title: 'Programming Languages & Web Technologies',
+          content: 'Java HTML CSS JavaScript basic programming languages web development'
+        },
+        {
+          section: 'skills',
+          title: 'Cloud & Development Tools',
+          content: 'AWS Cloud Practitioner Netlify GitHub cloud tools development'
+        },
+        {
+          section: 'skills',
+          title: 'Testing & Quality Assurance',
+          content: 'Interested Software Testing Automation Selenium JIRA testing QA quality assurance'
+        },
+        {
+          section: 'skills',
+          title: 'Achievements & Certifications',
+          content: 'Developed deployed NATPU AI chatbot Completed AWS Cloud Practitioner Essentials Java Basics certification HackerRank achievements certifications'
+        },
+        {
+          section: 'contact',
+          title: 'Contact Information',
+          content: 'gajiniprasanth291@gmail.com phone 8344458720 LinkedIn gajini-prasanth GitHub contact connect internships freelance junior developer roles email call'
+        }
+      ];
+
+      function highlightText(text, query) {
+        if (!query.trim()) return text;
+        const regex = new RegExp(`(${query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+        return text.replace(regex, '<span class="search-highlight">$1</span>');
+      }
+
+      function performSearch(query) {
+        if (!query.trim()) {
+          searchResults.hidden = true;
+          return;
+        }
+
+        const results = searchableContent.filter(item => 
+          item.content.toLowerCase().includes(query.toLowerCase()) ||
+          item.title.toLowerCase().includes(query.toLowerCase())
+        );
+
+        if (results.length === 0) {
+          searchResults.innerHTML = '<div class="search-result-item"><div class="search-result-title">No results found</div><div class="search-result-content">Try different keywords or browse sections manually</div></div>';
+          searchResults.hidden = false;
+          return;
+        }
+
+        const resultsHtml = results.map(result => {
+          const highlightedTitle = highlightText(result.title, query);
+          const words = result.content.split(' ');
+          const queryIndex = words.findIndex(word => 
+            word.toLowerCase().includes(query.toLowerCase())
+          );
+          
+          let snippet = '';
+          if (queryIndex !== -1) {
+            const start = Math.max(0, queryIndex - 5);
+            const end = Math.min(words.length, queryIndex + 10);
+            snippet = words.slice(start, end).join(' ');
+            if (start > 0) snippet = '...' + snippet;
+            if (end < words.length) snippet = snippet + '...';
+          } else {
+            snippet = words.slice(0, 15).join(' ') + '...';
+          }
+          
+          const highlightedSnippet = highlightText(snippet, query);
+          
+          return `
+            <div class="search-result-item" data-section="${result.section}">
+              <div class="search-result-title">${highlightedTitle}</div>
+              <div class="search-result-content">${highlightedSnippet}</div>
+              <div class="search-result-section">Found in: ${result.section.charAt(0).toUpperCase() + result.section.slice(1)}</div>
+            </div>
+          `;
+        }).join('');
+
+        searchResults.innerHTML = resultsHtml;
+        searchResults.hidden = false;
+
+        // Add click handlers to search results
+        searchResults.querySelectorAll('.search-result-item').forEach(item => {
+          item.addEventListener('click', () => {
+            const section = item.dataset.section;
+            if (section && window.showSection) {
+              window.showSection(section);
+              searchInput.value = '';
+              searchResults.hidden = true;
+            }
+          });
+        });
+      }
+
+      // Debounced search
+      let searchTimeout;
+      searchInput.addEventListener('input', (e) => {
+        clearTimeout(searchTimeout);
+        searchTimeout = setTimeout(() => {
+          performSearch(e.target.value);
+        }, 300);
+      });
+
+      // Hide results when clicking outside
+      document.addEventListener('click', (e) => {
+        if (!e.target.closest('.search-container')) {
+          searchResults.hidden = true;
+        }
+      });
+
+      // Show results when focusing on input if there's content
+      searchInput.addEventListener('focus', () => {
+        if (searchInput.value.trim()) {
+          performSearch(searchInput.value);
+        }
+      });
+    })();
+
     // Simple tab-like navigation
     (function(){
       const navBtns = document.querySelectorAll('.nav button');
@@ -371,6 +571,9 @@
         // scroll top of main content for mobile
         document.querySelector('.main').scrollTo({top:0,behavior:'smooth'});
       }
+
+      // Make show function globally available for search results
+      window.showSection = show;
 
       navBtns.forEach(btn => {
         btn.addEventListener('click', () => show(btn.dataset.target));
