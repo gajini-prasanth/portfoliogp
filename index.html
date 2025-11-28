@@ -4,126 +4,145 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Gajini Prasanth — Portfolio</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;900&display=swap" rel="stylesheet">
 
 <style>
 :root{
-  --accent:#0055ff;
-  --dark:#111;
-  --muted:#707070;
+  --primary:#0055ff;
+  --secondary:#111;
+  --muted:#666;
+  --grad:linear-gradient(90deg,#0055ff,#00a6ff);
 }
 
 *{margin:0;padding:0;box-sizing:border-box;font-family:"Poppins",sans-serif}
 
 body{
   background:#fff;
-  color:var(--dark);
-  padding:40px 18px;
+  color:var(--secondary);
+  padding:40px;
+  line-height:1.5;
 }
 
 .container{
-  max-width:1100px;
+  max-width:1150px;
   margin:auto;
 }
 
-/* ===== HERO ===== */
+/* HERO */
 .hero{
+  background:#ffffff;
+  border-radius:24px;
+  padding:60px 40px;
   text-align:center;
-  margin-bottom:50px;
-  padding:40px 0;
-  background:linear-gradient(145deg,#ffffff,#f4f7ff);
-  border-radius:20px;
-  box-shadow:0 8px 30px rgba(0,0,0,0.07);
-  transition:.4s;
+  box-shadow:0 10px 40px rgba(0,0,0,0.08);
+  border:1px solid #e9e9e9;
+  transition:.5s;
 }
 
 .hero:hover{
-  transform:translateY(-6px);
-  box-shadow:0 15px 45px rgba(0,0,0,0.14);
+  transform:translateY(-8px);
+  box-shadow:0 15px 60px rgba(0,0,0,0.15);
 }
 
 .hero img{
   width:150px;height:150px;border-radius:50%;
-  border:5px solid #fff;
   object-fit:cover;
-  box-shadow:0 10px 30px rgba(0,0,0,0.1);
+  border:6px solid #fff;
+  box-shadow:0 8px 30px rgba(0,0,0,0.1);
 }
 
 .hero h1{
-  font-size:2rem;
-  font-weight:800;
-  margin-top:14px;
+  font-size:2.6rem;
+  font-weight:900;
+  margin-top:18px;
+  background:var(--grad);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
 }
 
 .hero p{
   color:var(--muted);
-  font-size:1.1rem;
+  font-size:1.2rem;
   margin-top:8px;
 }
 
-.badges{
-  display:flex;
-  gap:12px;
-  justify-content:center;
-  margin-top:18px;
-  flex-wrap:wrap;
+.btns{
+  display:flex;gap:14px;justify-content:center;margin-top:24px;flex-wrap:wrap;
 }
 
-.badge{
-  padding:10px 18px;
+.btn{
+  padding:12px 20px;
+  font-size:0.95rem;
+  color:var(--primary);
   border-radius:50px;
-  background:#e9edff;
-  color:var(--accent);
-  border:1px solid #dbe2ff;
-  font-weight:600;
+  border:2px solid #d6e1ff;
+  background:#f2f7ff;
   text-decoration:none;
+  font-weight:700;
   transition:.3s;
 }
 
-.badge:hover{
-  background:var(--accent);
+.btn:hover{
+  background:var(--primary);
   color:#fff;
+  border-color:var(--primary);
 }
 
-/* ===== SECTIONS ===== */
+/* SECTION CARD */
 .section{
-  margin-top:32px;
-  padding:30px;
-  background:#fff;
-  border-radius:16px;
-  border:1px solid #ebebeb;
-  box-shadow:0 6px 26px rgba(0,0,0,0.06);
+  margin-top:50px;
 }
 
-.section h2{
+.card{
+  background:#fff;
+  padding:30px;
+  border-radius:18px;
+  border:1px solid #e8e8e8;
+  box-shadow:0 8px 30px rgba(0,0,0,0.06);
+  transition:.3s;
+  margin-top:18px;
+}
+
+.card:hover{
+  transform:scale(1.02);
+  box-shadow:0 15px 45px rgba(0,0,0,0.12);
+  border-color:var(--primary);
+}
+
+.card h2{
   font-size:1.4rem;
   font-weight:700;
-  color:var(--accent);
-  margin-bottom:10px;
+  background:var(--grad);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  margin-bottom:12px;
 }
 
-.section p,li{
+.card strong{font-size:1rem;color:#000}
+.card small{color:var(--muted)}
+
+.card p,li{
   font-size:1rem;
   color:#333;
-  line-height:1.6;
 }
 
 ul{margin-left:18px}
 
-/* ===== PROJECT CARDS ===== */
+/* PROJECT CARD SPECIAL */
 .project{
-  border:1px solid #e8e8e8;
-  padding:16px;
-  margin-top:16px;
-  border-radius:12px;
+  padding:22px;
+  border-radius:14px;
+  border:1px solid #dde8ff;
+  background:#f7faff;
+  margin-top:12px;
   transition:.3s;
-  background:#fafbff;
 }
 
 .project:hover{
-  transform:scale(1.02);
-  border-color:var(--accent);
-  box-shadow:0 10px 22px rgba(0,85,255,0.15);
+  transform:translateY(-4px);
+  border-color:var(--primary);
+  box-shadow:0 12px 25px rgba(0,85,255,0.15);
+  background:#fff;
 }
 
 .project h3{
@@ -131,13 +150,12 @@ ul{margin-left:18px}
   font-weight:700;
 }
 
-/* ===== FOOTER ===== */
+/* FOOTER */
 footer{
   text-align:center;
+  margin-top:50px;
   padding:30px;
-  font-size:.9rem;
   color:var(--muted);
-  margin-top:40px;
 }
 </style>
 </head>
@@ -146,87 +164,87 @@ footer{
 <div class="container">
 
 <!-- HERO -->
-<div class="hero">
+<section class="hero">
   <img src="gajini.jpeg" onerror="this.src='https://via.placeholder.com/150?text=GP'">
   <h1>Gajini Prasanth</h1>
   <p>Computer Science & Engineering • Java • Web • Cloud • AI</p>
 
-  <div class="badges">
-    <a class="badge" href="mailto:gajiniprasanth291@gmail.com">Email</a>
-    <a class="badge" href="tel:+918344458720">Call</a>
-    <a class="badge" href="https://github.com/gajini-prasanth" target="_blank">GitHub</a>
-    <a class="badge" href="https://www.linkedin.com/in/gajini-prasanth-8285ba2a3/" target="_blank">LinkedIn</a>
-    <a class="badge" href="resume.pdf" download>Resume</a>
+  <div class="btns">
+    <a class="btn" href="mailto:gajiniprasanth291@gmail.com">Email</a>
+    <a class="btn" href="tel:+918344458720">Phone</a>
+    <a class="btn" href="https://github.com/gajini-prasanth" target="_blank">GitHub</a>
+    <a class="btn" href="https://www.linkedin.com/in/gajini-prasanth-8285ba2a3/" target="_blank">LinkedIn</a>
+    <a class="btn" href="resume.pdf" download>Download Resume</a>
   </div>
-</div>
+</section>
+
 
 <!-- ABOUT -->
-<section class="section">
+<div class="section card">
   <h2>About</h2>
   <p>
-  I’m a highly motivated Computer Science and Engineering student passionate about web development, cloud computing and Java development. I love creating impactful digital experiences and projects.
+    I am a passionate Computer Science & Engineering student interested in Java, web development, cloud technologies, and AI. I enjoy creating projects and solving technical problems.
   </p>
-</section>
+</div>
 
 <!-- EXPERIENCE -->
-<section class="section">
+<div class="section card">
   <h2>Experience</h2>
 
-  <div>
-    <strong>Graphic Designer — YHills Edutech</strong><br>
-    <small>Jun 2025 – Aug 2025</small>
-    <p>Designed product illustrations and collaborated with marketing and UI/UX teams.</p>
-  </div>
+  <strong>Graphic Designer — YHills Edutech</strong><br>
+  <small>Jun 2025 – Aug 2025</small>
+  <p>Created product graphics and collaborated with marketing and web teams.</p>
 
-  <div style="margin-top:16px">
-    <strong>Intern — NEXUS</strong><br>
-    <small>Dec 2023 – Mar 2024</small>
-    <p>Worked on data analysis and reporting, supported project operations.</p>
-  </div>
-</section>
+  <br>
+  <strong>Intern — NEXUS</strong><br>
+  <small>Dec 2023 – Mar 2024</small>
+  <p>Worked on data analysis and reporting.</p>
+</div>
 
 <!-- PROJECTS -->
-<section class="section">
+<div class="section card">
   <h2>Projects</h2>
 
   <div class="project">
     <h3>Bridhunas Ladies Corner</h3>
-    <p>Hosted on Netlify — community website with responsive UI/UX.</p>
+    <p>Community website hosted on Netlify with responsive UI/UX.</p>
   </div>
 
   <div class="project">
     <h3>E-Learning System (Java + Selenium)</h3>
-    <p>End-to-end interactive learning platform.</p>
+    <p>Interactive learning platform with automated flows.</p>
   </div>
 
   <div class="project">
-    <h3>Question Paper Generator System</h3>
-    <p>Automatically generates question papers based on difficulty and subject.</p>
+    <h3>Question Paper Generator</h3>
+    <p>Auto-creation of question papers based on difficulty and subject.</p>
   </div>
-</section>
+</div>
 
 <!-- SKILLS -->
-<section class="section">
+<div class="section card">
   <h2>Skills</h2>
   <ul>
     <li>Java, HTML, CSS</li>
-    <li>Cloud (AWS)</li>
+    <li>AWS Cloud</li>
     <li>Databases</li>
     <li>Content Creation</li>
   </ul>
-</section>
+</div>
 
-<!-- CERTS -->
-<section class="section">
+<!-- CERT -->
+<div class="section card">
   <h2>Certifications</h2>
   <ul>
     <li>AWS Cloud Practitioner</li>
     <li>Java Basics (HackerRank)</li>
     <li>Cybersecurity Program</li>
   </ul>
-</section>
+</div>
 
-<footer>© 2025 — Designed by Gajini Prasanth</footer>
+<footer>
+  © 2025 — Designed by Gajini Prasanth
+</footer>
 
 </div>
 </body>
