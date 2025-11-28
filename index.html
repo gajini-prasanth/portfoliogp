@@ -4,84 +4,167 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Gajini Prasanth — Portfolio</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 
 <style>
-:root {
-  --primary:#1a73e8;
-  --secondary:#444;
-  --muted:#6a6a6a;
-  --border:#e5e5e5;
+:root{
+  --accent:#0055ff;
+  --dark:#111;
+  --muted:#707070;
 }
 
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif}
+*{margin:0;padding:0;box-sizing:border-box;font-family:"Poppins",sans-serif}
 
-body{background:#fff;color:#111;padding:40px}
-.container{max-width:1100px;margin:auto}
-
-header{text-align:center;margin-bottom:30px}
-header h1{font-size:1.8rem;font-weight:800;color:#000}
-header p{color:var(--muted);font-size:1rem;margin-top:6px}
-
-.avatar{
-  width:140px;height:140px;border-radius:50%;margin:20px auto;display:block;
-  object-fit:cover;border:4px solid #ddd
+body{
+  background:#fff;
+  color:var(--dark);
+  padding:40px 18px;
 }
 
-.section{
-  background:#fff;border:1px solid var(--border);
-  padding:22px;border-radius:12px;margin-top:22px
+.container{
+  max-width:1100px;
+  margin:auto;
 }
 
-.section h2{
-  color:var(--primary);font-size:1.2rem;margin-bottom:12px;font-weight:700;
+/* ===== HERO ===== */
+.hero{
+  text-align:center;
+  margin-bottom:50px;
+  padding:40px 0;
+  background:linear-gradient(145deg,#ffffff,#f4f7ff);
+  border-radius:20px;
+  box-shadow:0 8px 30px rgba(0,0,0,0.07);
+  transition:.4s;
 }
 
-p,li{color:#444;font-size:1rem;line-height:1.5}
-ul{margin-left:18px}
+.hero:hover{
+  transform:translateY(-6px);
+  box-shadow:0 15px 45px rgba(0,0,0,0.14);
+}
 
-.info{
-  display:flex;gap:12px;justify-content:center;margin-top:10px;flex-wrap:wrap
+.hero img{
+  width:150px;height:150px;border-radius:50%;
+  border:5px solid #fff;
+  object-fit:cover;
+  box-shadow:0 10px 30px rgba(0,0,0,0.1);
+}
+
+.hero h1{
+  font-size:2rem;
+  font-weight:800;
+  margin-top:14px;
+}
+
+.hero p{
+  color:var(--muted);
+  font-size:1.1rem;
+  margin-top:8px;
+}
+
+.badges{
+  display:flex;
+  gap:12px;
+  justify-content:center;
+  margin-top:18px;
+  flex-wrap:wrap;
 }
 
 .badge{
-  padding:7px 14px;font-size:0.9rem;border-radius:8px;background:#e9f1ff;
-  color:#1a73e8;font-weight:600;border:1px solid #d8e7ff;text-decoration:none
+  padding:10px 18px;
+  border-radius:50px;
+  background:#e9edff;
+  color:var(--accent);
+  border:1px solid #dbe2ff;
+  font-weight:600;
+  text-decoration:none;
+  transition:.3s;
 }
 
+.badge:hover{
+  background:var(--accent);
+  color:#fff;
+}
+
+/* ===== SECTIONS ===== */
+.section{
+  margin-top:32px;
+  padding:30px;
+  background:#fff;
+  border-radius:16px;
+  border:1px solid #ebebeb;
+  box-shadow:0 6px 26px rgba(0,0,0,0.06);
+}
+
+.section h2{
+  font-size:1.4rem;
+  font-weight:700;
+  color:var(--accent);
+  margin-bottom:10px;
+}
+
+.section p,li{
+  font-size:1rem;
+  color:#333;
+  line-height:1.6;
+}
+
+ul{margin-left:18px}
+
+/* ===== PROJECT CARDS ===== */
 .project{
-  border:1px solid #ddd;padding:16px;border-radius:10px;margin-top:12px
+  border:1px solid #e8e8e8;
+  padding:16px;
+  margin-top:16px;
+  border-radius:12px;
+  transition:.3s;
+  background:#fafbff;
 }
-.project h3{color:#000;font-size:1.1rem;margin-bottom:6px}
 
-footer{text-align:center;margin-top:40px;color:var(--muted);font-size:0.9rem}
+.project:hover{
+  transform:scale(1.02);
+  border-color:var(--accent);
+  box-shadow:0 10px 22px rgba(0,85,255,0.15);
+}
 
+.project h3{
+  font-size:1.1rem;
+  font-weight:700;
+}
+
+/* ===== FOOTER ===== */
+footer{
+  text-align:center;
+  padding:30px;
+  font-size:.9rem;
+  color:var(--muted);
+  margin-top:40px;
+}
 </style>
 </head>
 <body>
 
 <div class="container">
 
-<header>
-  <img src="gajini.jpeg" class="avatar" onerror="this.src='https://via.placeholder.com/140?text=GP'">
-  <h1>Gajini Prasanth G</h1>
-  <p>Computer Science & Engineering (2023–2027)</p>
-  <p>Java • Web Development • Cloud • AI</p>
-</header>
+<!-- HERO -->
+<div class="hero">
+  <img src="gajini.jpeg" onerror="this.src='https://via.placeholder.com/150?text=GP'">
+  <h1>Gajini Prasanth</h1>
+  <p>Computer Science & Engineering • Java • Web • Cloud • AI</p>
 
-<div class="info">
-  <a class="badge" href="mailto:gajiniprasanth291@gmail.com">Email</a>
-  <a class="badge" href="tel:+918344458720">Phone</a>
-  <a class="badge" href="https://www.linkedin.com/in/gajini-prasanth-8285ba2a3/" target="_blank">LinkedIn</a>
-  <a class="badge" href="https://github.com/gajini-prasanth" target="_blank">GitHub</a>
-  <a class="badge" href="resume.pdf" download>Resume PDF</a>
+  <div class="badges">
+    <a class="badge" href="mailto:gajiniprasanth291@gmail.com">Email</a>
+    <a class="badge" href="tel:+918344458720">Call</a>
+    <a class="badge" href="https://github.com/gajini-prasanth" target="_blank">GitHub</a>
+    <a class="badge" href="https://www.linkedin.com/in/gajini-prasanth-8285ba2a3/" target="_blank">LinkedIn</a>
+    <a class="badge" href="resume.pdf" download>Resume</a>
+  </div>
 </div>
 
 <!-- ABOUT -->
 <section class="section">
   <h2>About</h2>
   <p>
-A motivated Computer Science and Engineering student passionate about web development, Java, cloud computing and AI. I am committed to continuous learning and enjoy building products that solve real problems. I am seeking opportunities to work on real-world software development or cloud engineering projects.
+  I’m a highly motivated Computer Science and Engineering student passionate about web development, cloud computing and Java development. I love creating impactful digital experiences and projects.
   </p>
 </section>
 
@@ -90,15 +173,15 @@ A motivated Computer Science and Engineering student passionate about web develo
   <h2>Experience</h2>
 
   <div>
-    <strong>Graphic Designer — YHills Edutech Pvt Ltd</strong><br>
+    <strong>Graphic Designer — YHills Edutech</strong><br>
     <small>Jun 2025 – Aug 2025</small>
-    <p>Created visual concepts using design tools, collaborated with marketing, and designed product illustrations and web graphics.</p>
+    <p>Designed product illustrations and collaborated with marketing and UI/UX teams.</p>
   </div>
 
-  <div style="margin-top:14px">
+  <div style="margin-top:16px">
     <strong>Intern — NEXUS</strong><br>
     <small>Dec 2023 – Mar 2024</small>
-    <p>Gained experience in data analysis, reporting, and project coordination while collaborating with team members and stakeholders.</p>
+    <p>Worked on data analysis and reporting, supported project operations.</p>
   </div>
 </section>
 
@@ -107,27 +190,19 @@ A motivated Computer Science and Engineering student passionate about web develo
   <h2>Projects</h2>
 
   <div class="project">
-    <h3>Bridhunas-LC Website</h3>
-    <p>Two-month project hosted on Netlify — focus on responsive UI and clean design.</p>
-    <a href="https://bridhunaslc.netlify.app/" target="_blank" class="badge">Live</a>
+    <h3>Bridhunas Ladies Corner</h3>
+    <p>Hosted on Netlify — community website with responsive UI/UX.</p>
   </div>
 
   <div class="project">
     <h3>E-Learning System (Java + Selenium)</h3>
-    <p>A complete web app for course access and digital learning with modular, scalable architecture.</p>
+    <p>End-to-end interactive learning platform.</p>
   </div>
 
   <div class="project">
-    <h3>Question Paper Generator (Java)</h3>
-    <p>Automates creation of question papers based on subject, difficulty, and marks.</p>
+    <h3>Question Paper Generator System</h3>
+    <p>Automatically generates question papers based on difficulty and subject.</p>
   </div>
-</section>
-
-<!-- EDUCATION -->
-<section class="section">
-  <h2>Education</h2>
-  <p><strong>B.E. Computer Science and Engineering</strong> — Erode Sengunthar Engineering College</p>
-  <p>2023 – 2027</p>
 </section>
 
 <!-- SKILLS -->
@@ -148,13 +223,10 @@ A motivated Computer Science and Engineering student passionate about web develo
     <li>AWS Cloud Practitioner</li>
     <li>Java Basics (HackerRank)</li>
     <li>Cybersecurity Program</li>
-    <li>ChatGPT Search Certification</li>
   </ul>
 </section>
 
-<footer>
-  © 2025 — Built by Gajini Prasanth
-</footer>
+<footer>© 2025 — Designed by Gajini Prasanth</footer>
 
 </div>
 </body>
