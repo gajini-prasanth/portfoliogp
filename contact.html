@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - Gajini Prasanth</title>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Core Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary': '#0D4F4C',
+                        'secondary': '#FF6B6B',
+                        'accent': '#F7B731',
+                        'neutral': '#2C3E50',
+                        'bg-light': '#FAFBFC'
+                    },
+                    fontFamily: {
+                        'display': ['Playfair Display', 'serif'],
+                        'body': ['Inter', 'sans-serif'],
+                        'mono': ['JetBrains Mono', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        .form-group {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .contact-card {
+            transition: all 0.3s ease;
+        }
+        
+        .contact-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .social-icon {
+            transition: all 0.3s ease;
+        }
+        
+        .social-icon:hover {
+            transform: scale(1.1);
+        }
+        
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #F7B731;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .form-input {
+            transition: all 0.3s ease;
+        }
+        
+        .form-input:focus {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(13, 79, 76, 0.1);
+        }
+        
+        .success-message {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+        }
+        
+        .success-message.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="bg-bg-light font-body">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-white/90 backdrop-blur-md z-50 border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <div class="font-display font-bold text-xl text-primary">Gajini Prasanth</div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html" class="nav-link text-neutral hover:text-primary">Home</a>
+                    <a href="about.html" class="nav-link text-neutral hover:text-primary">About</a>
+                    <a href="projects.html" class="nav-link text-neutral hover:text-primary">Projects</a>
+                    <a href="#contact" class="nav-link text-primary">Contact</a>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-neutral hover:text-primary">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-24 pb-16 bg-gradient-to-br from-primary/5 to-secondary/5">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center">
+                <h1 class="font-display text-5xl lg:text-6xl font-bold text-neutral mb-6" id="contact-title">
+                    Get In Touch
+                </h1>
+                <p class="text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed" id="contact-subtitle">
+                    I'm always open to discussing new opportunities, interesting projects, 
+                    or just having a chat about technology and innovation.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Methods -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid md:grid-cols-3 gap-8 mb-16">
+                <div class="contact-card bg-gray-50 p-8 rounded-2xl text-center">
+                    <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <span class="text-2xl">📧</span>
+                    </div>
+                    <h3 class="font-display text-2xl font-bold text-neutral mb-4">Email</h3>
+                    <p class="text-gray-600 mb-4">For professional inquiries and collaborations</p>
+                    <a href="mailto:gajiniprasanth291@gmail.com" class="text-primary font-semibold hover:text-secondary transition-colors">
+                        gajiniprasanth291@gmail.com
+                    </a>
+                </div>
+                
+                <div class="contact-card bg-gray-50 p-8 rounded-2xl text-center">
+                    <div class="w-16 h-16 bg-secondary/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <span class="text-2xl">💼</span>
+                    </div>
+                    <h3 class="font-display text-2xl font-bold text-neutral mb-4">LinkedIn</h3>
+                    <p class="text-gray-600 mb-4">Connect with me professionally</p>
+                    <a href="https://linkedin.com" target="_blank" class="text-secondary font-semibold hover:text-primary transition-colors">
+                        View Profile
+                    </a>
+                </div>
+                
+                <div class="contact-card bg-gray-50 p-8 rounded-2xl text-center">
+                    <div class="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <span class="text-2xl">💻</span>
+                    </div>
+                    <h3 class="font-display text-2xl font-bold text-neutral mb-4">GitHub</h3>
+                    <p class="text-gray-600 mb-4">Check out my code and projects</p>
+                    <a href="https://github.com" target="_blank" class="text-accent font-semibold hover:text-primary transition-colors">
+                        View Repositories
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Form -->
+    <section class="py-20 bg-gray-50">
+        <div class="max-w-4xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="font-display text-4xl font-bold text-neutral mb-6">Send Me a Message</h2>
+                <p class="text-xl text-gray-600">
+                    Have a project in mind? Want to collaborate? I'd love to hear from you!
+                </p>
+            </div>
+            
+            <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-100">
+                <form id="contact-form" class="space-y-6">
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="form-group">
+                            <label for="name" class="block text-sm font-semibold text-neutral mb-2">Full Name</label>
+                            <input 
+                                type="text" 
+                                id="name" 
+                                name="name" 
+                                required
+                                class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none"
+                                placeholder="Your full name"
+                            >
+                            <span class="error-message text-red-500 text-sm mt-1 hidden">Please enter your name</span>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email" class="block text-sm font-semibold text-neutral mb-2">Email Address</label>
+                            <input 
+                                type="email" 
+                                id="email" 
+                                name="email" 
+                                required
+                                class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none"
+                                placeholder="your.email@example.com"
+                            >
+                            <span class="error-message text-red-500 text-sm mt-1 hidden">Please enter a valid email</span>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="subject" class="block text-sm font-semibold text-neutral mb-2">Subject</label>
+                        <select 
+                            id="subject" 
+                            name="subject" 
+                            required
+                            class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none"
+                        >
+                            <option value="">Select a subject</option>
+                            <option value="collaboration">Project Collaboration</option>
+                            <option value="job">Job Opportunity</option>
+                            <option value="freelance">Freelance Work</option>
+                            <option value="question">General Question</option>
+                            <option value="other">Other</option>
+                        </select>
+                        <span class="error-message text-red-500 text-sm mt-1 hidden">Please select a subject</span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message" class="block text-sm font-semibold text-neutral mb-2">Message</label>
+                        <textarea 
+                            id="message" 
+                            name="message" 
+                            rows="6" 
+                            required
+                            class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none resize-none"
+                            placeholder="Tell me about your project, idea, or question..."
+                        ></textarea>
+                        <span class="error-message text-red-500 text-sm mt-1 hidden">Please enter your message</span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <div class="flex items-center">
+                            <input 
+                                type="checkbox" 
+                                id="privacy" 
+                                name="privacy" 
+                                required
+                                class="w-4 h-4 text-primary border-gray-300 rounded focus:ring-primary"
+                            >
+                            <label for="privacy" class="ml-3 text-sm text-gray-600">
+                                I agree to the <a href="#" class="text-primary hover:text-secondary">privacy policy</a> and terms
+                            </label>
+                        </div>
+                        <span class="error-message text-red-500 text-sm mt-1 hidden">Please accept the privacy policy</span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <button 
+                            type="submit" 
+                            class="w-full bg-primary text-white px-8 py-4 rounded-lg font-semibold hover:bg-teal-700 transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
+                            id="submit-btn"
+                        >
+                            <span class="submit-text">Send Message</span>
+                            <span class="loading-text hidden">Sending...</span>
+                        </button>
+                    </div>
+                </form>
+                
+                <!-- Success Message -->
+                <div id="success-message" class="success-message bg-green-50 border border-green-200 rounded-lg p-6 text-center">
+                    <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-2xl">✓</span>
+                    </div>
+                    <h3 class="font-display text-2xl font-bold text-green-800 mb-2">Message Sent Successfully!</h3>
+                    <p class="text-green-600">
+                        Thank you for reaching out. I'll get back to you within 24 hours.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Availability Status -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="bg-gradient-to-r from-primary/5 to-secondary/5 rounded-2xl p-8 text-center">
+                <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <div class="w-4 h-4 bg-green-500 rounded-full animate-pulse"></div>
+                </div>
+                <h2 class="font-display text-3xl font-bold text-neutral mb-4">Available for Opportunities</h2>
+                <p class="text-xl text-gray-600 mb-6">
+                    I'm currently open to internship opportunities, freelance projects, 
+                    and collaborative work in web development and Java applications.
+                </p>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <span class="bg-white px-4 py-2 rounded-full text-primary font-semibold shadow-sm">Java Development</span>
+                    <span class="bg-white px-4 py-2 rounded-full text-secondary font-semibold shadow-sm">Web Development</span>
+                    <span class="bg-white px-4 py-2 rounded-full text-accent font-semibold shadow-sm">Data Science</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Links -->
+    <section class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="font-display text-4xl font-bold text-neutral mb-6">Connect With Me</h2>
+                <p class="text-xl text-gray-600">
+                    Follow my journey and stay updated with my latest projects
+                </p>
+            </div>
+            
+            <div class="flex justify-center space-x-8">
+                <a href="mailto:gajiniprasanth291@gmail.com" class="social-icon bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-lg transition-all">
+                    <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-4">
+                        <span class="text-2xl">📧</span>
+                    </div>
+                    <p class="font-semibold text-neutral text-center">Email</p>
+                </a>
+                
+                <a href="https://linkedin.com" target="_blank" class="social-icon bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-lg transition-all">
+                    <div class="w-16 h-16 bg-secondary/10 rounded-full flex items-center justify-center mb-4">
+                        <span class="text-2xl">💼</span>
+                    </div>
+                    <p class="font-semibold text-neutral text-center">LinkedIn</p>
+                </a>
+                
+                <a href="https://github.com" target="_blank" class="social-icon bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-lg transition-all">
+                    <div class="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center mb-4">
+                        <span class="text-2xl">💻</span>
+                    </div>
+                    <p class="font-semibold text-neutral text-center">GitHub</p>
+                </a>
+                
+                <a href="https://twitter.com" target="_blank" class="social-icon bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-lg transition-all">
+                    <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-4">
+                        <span class="text-2xl">🐦</span>
+                    </div>
+                    <p class="font-semibold text-neutral text-center">Twitter</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-neutral text-white py-12">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <div class="mb-8">
+                <h3 class="font-display text-2xl font-bold mb-4">Gajini Prasanth</h3>
+                <p class="text-gray-300 mb-6">Computer Science Student • Developer • Problem Solver</p>
+                <div class="flex justify-center space-x-6">
+                    <a href="mailto:gajiniprasanth291@gmail.com" class="text-gray-300 hover:text-accent transition-colors">
+                        Email
+                    </a>
+                    <a href="https://github.com" target="_blank" class="text-gray-300 hover:text-accent transition-colors">
+                        GitHub
+                    </a>
+                    <a href="https://linkedin.com" target="_blank" class="text-gray-300 hover:text-accent transition-colors">
+                        LinkedIn
+                    </a>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 pt-8">
+                <p class="text-gray-400">
+                    © 2025 Gajini Prasanth. Built with passion and code.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="main.js"></script>
+</body>
+</html>

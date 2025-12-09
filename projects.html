@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects - Gajini Prasanth</title>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Core Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary': '#0D4F4C',
+                        'secondary': '#FF6B6B',
+                        'accent': '#F7B731',
+                        'neutral': '#2C3E50',
+                        'bg-light': '#FAFBFC'
+                    },
+                    fontFamily: {
+                        'display': ['Playfair Display', 'serif'],
+                        'body': ['Inter', 'sans-serif'],
+                        'mono': ['JetBrains Mono', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        .project-card {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.3s ease;
+        }
+        
+        .project-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        .filter-btn {
+            transition: all 0.3s ease;
+        }
+        
+        .filter-btn.active {
+            background: #0D4F4C;
+            color: white;
+        }
+        
+        .timeline-node {
+            opacity: 0;
+            transform: scale(0.8);
+        }
+        
+        .timeline-node.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+        
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #F7B731;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 1000;
+        }
+        
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: 1rem;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            margin: 2rem;
+        }
+    </style>
+</head>
+<body class="bg-bg-light font-body">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-white/90 backdrop-blur-md z-50 border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <div class="font-display font-bold text-xl text-primary">Gajini Prasanth</div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html" class="nav-link text-neutral hover:text-primary">Home</a>
+                    <a href="about.html" class="nav-link text-neutral hover:text-primary">About</a>
+                    <a href="#projects" class="nav-link text-primary">Projects</a>
+                    <a href="contact.html" class="nav-link text-neutral hover:text-primary">Contact</a>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-neutral hover:text-primary">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-24 pb-16 bg-gradient-to-br from-primary/5 to-secondary/5">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center">
+                <h1 class="font-display text-5xl lg:text-6xl font-bold text-neutral mb-6" id="projects-title">
+                    My Projects
+                </h1>
+                <p class="text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed" id="projects-subtitle">
+                    A collection of my work in web development, Java applications, data science, 
+                    and innovative solutions that showcase my technical skills and creativity.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Filters -->
+    <section class="py-12 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-wrap justify-center gap-4 mb-12">
+                <button class="filter-btn active px-6 py-3 rounded-full border-2 border-primary text-primary font-semibold" data-filter="all">
+                    All Projects
+                </button>
+                <button class="filter-btn px-6 py-3 rounded-full border-2 border-primary text-primary font-semibold" data-filter="web">
+                    Web Development
+                </button>
+                <button class="filter-btn px-6 py-3 rounded-full border-2 border-primary text-primary font-semibold" data-filter="java">
+                    Java Applications
+                </button>
+                <button class="filter-btn px-6 py-3 rounded-full border-2 border-primary text-primary font-semibold" data-filter="data">
+                    Data Science
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Grid -->
+    <section class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="projects-grid">
+                
+                <!-- Project 1: Bridhunas Ladies Corner -->
+                <div class="project-card bg-white rounded-2xl p-8 shadow-sm border border-gray-100" data-category="web">
+                    <div class="mb-6">
+                        <div class="w-16 h-16 bg-primary/10 rounded-xl flex items-center justify-center mb-4">
+                            <span class="text-3xl">🛍️</span>
+                        </div>
+                        <h3 class="font-display text-2xl font-bold text-neutral mb-3">Bridhunas Ladies Corner</h3>
+                        <p class="text-gray-600 mb-4">
+                            A complete e-commerce platform for ladies fashion, featuring user authentication, 
+                            product catalog, shopping cart, and secure payment integration.
+                        </p>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <h4 class="font-semibold text-neutral mb-3">Key Features:</h4>
+                        <ul class="text-gray-600 space-y-2 text-sm">
+                            <li>• User registration and authentication</li>
+                            <li>• Product browsing and search</li>
+                            <li>• Shopping cart functionality</li>
+                            <li>• Order management system</li>
+                            <li>• Admin dashboard for inventory</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-medium">Java</span>
+                        <span class="bg-secondary/10 text-secondary px-3 py-1 rounded-full text-sm font-medium">JDBC</span>
+                        <span class="bg-accent/10 text-accent px-3 py-1 rounded-full text-sm font-medium">Netlify</span>
+                        <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-medium">MySQL</span>
+                    </div>
+                    
+                    <div class="flex space-x-4">
+                        <button class="view-project bg-primary text-white px-4 py-2 rounded-lg font-semibold hover:bg-teal-700 transition-colors" data-project="bridhunas">
+                            View Details
+                        </button>
+                        <a href="#" class="border-2 border-primary text-primary px-4 py-2 rounded-lg font-semibold hover:bg-primary hover:text-white transition-colors">
+                            Live Demo
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 2: E-Learning System -->
+                <div class="project-card bg-white rounded-2xl p-8 shadow-sm border border-gray-100" data-category="java">
+                    <div class="mb-6">
+                        <div class="w-16 h-16 bg-secondary/10 rounded-xl flex items-center justify-center mb-4">
+                            <span class="text-3xl">📚</span>
+                        </div>
+                        <h3 class="font-display text-2xl font-bold text-neutral mb-3">E-Learning System</h3>
+                        <p class="text-gray-600 mb-4">
+                            Comprehensive web application for online learning with course management, 
+                            student progress tracking, and interactive content delivery.
+                        </p>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <h4 class="font-semibold text-neutral mb-3">Key Features:</h4>
+                        <ul class="text-gray-600 space-y-2 text-sm">
+                            <li>• Course creation and management</li>
+                            <li>• Student enrollment system</li>
+                            <li>• Progress tracking and analytics</li>
+                            <li>• Interactive quizzes and assignments</li>
+                            <li>• Discussion forums</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-medium">Java</span>
+                        <span class="bg-secondary/10 text-secondary px-3 py-1 rounded-full text-sm font-medium">Selenium</span>
+                        <span class="bg-accent/10 text-accent px-3 py-1 rounded-full text-sm font-medium">Spring Boot</span>
+                        <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-medium">JPA</span>
+                    </div>
+                    
+                    <div class="flex space-x-4">
+                        <button class="view-project bg-primary text-white px-4 py-2 rounded-lg font-semibold hover:bg-teal-700 transition-colors" data-project="elearning">
+                            View Details
+                        </button>
+                        <a href="#" class="border-2 border-primary text-primary px-4 py-2 rounded-lg font-semibold hover:bg-primary hover:text-white transition-colors">
+                            GitHub
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 3: Question Paper Generator -->
+                <div class="project-card bg-white rounded-2xl p-8 shadow-sm border border-gray-100" data-category="java">
+                    <div class="mb-6">
+                        <div class="w-16 h-16 bg-accent/10 rounded-xl flex items-center justify-center mb-4">
+                            <span class="text-3xl">📋</span>
+                        </div>
+                        <h3 class="font-display text-2xl font-bold text-neutral mb-3">Question Paper Generator</h3>
+                        <p class="text-gray-600 mb-4">
+                            Automated system for generating exam question papers with intelligent 
+                            question selection based on difficulty and topic distribution.
+                        </p>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <h4 class="font-semibold text-neutral mb-3">Key Features:</h4>
+                        <ul class="text-gray-600 space-y-2 text-sm">
+                            <li>• Intelligent question selection algorithm</li>
+                            <li>• Difficulty level balancing</li>
+                            <li>• Topic-wise question distribution</li>
+                            <li>• PDF generation and formatting</li>
+                            <li>• Question bank management</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-medium">Java</span>
+                        <span class="bg-secondary/10 text-secondary px-3 py-1 rounded-full text-sm font-medium">Swing</span>
+                        <span class="bg-accent/10 text-accent px-3 py-1 rounded-full text-sm font-medium">MySQL</span>
+                        <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-medium">iText</span>
+                    </div>
+                    
+                    <div class="flex space-x-4">
+                        <button class="view-project bg-primary text-white px-4 py-2 rounded-lg font-semibold hover:bg-teal-700 transition-colors" data-project="question-generator">
+                            View Details
+                        </button>
+                        <a href="#" class="border-2 border-primary text-primary px-4 py-2 rounded-lg font-semibold hover:bg-primary hover:text-white transition-colors">
+                            GitHub
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 4: Safe Drive 360 -->
+                <div class="project-card bg-white rounded-2xl p-8 shadow-sm border border-gray-100" data-category="data">
+                    <div class="mb-6">
+                        <div class="w-16 h-16 bg-primary/10 rounded-xl flex items-center justify-center mb-4">
+                            <span class="text-3xl">🚗</span>
+                        </div>
+                        <h3 class="font-display text-2xl font-bold text-neutral mb-3">Safe Drive 360</h3>
+                        <p class="text-gray-600 mb-4">
+                            Cloud-based video analytics startup focused on road safety, delivering scalable 
+                            storage and compute prototypes for real-world use.
+                        </p>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <h4 class="font-semibold text-neutral mb-3">Key Features:</h4>
+                        <ul class="text-gray-600 space-y-2 text-sm">
+                            <li>• Video analytics for driver behavior</li>
+                            <li>• Cloud-based storage solutions</li>
+                            <li>• Real-time alert systems</li>
+                            <li>• Scalable compute infrastructure</li>
+                            <li>• Data visualization dashboard</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-medium">Python</span>
+                        <span class="bg-secondary/10 text-secondary px-3 py-1 rounded-full text-sm font-medium">OpenCV</span>
+                        <span class="bg-accent/10 text-accent px-3 py-1 rounded-full text-sm font-medium">AWS</span>
+                        <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-medium">TensorFlow</span>
+                    </div>
+                    
+                    <div class="flex space-x-4">
+                        <button class="view-project bg-primary text-white px-4 py-2 rounded-lg font-semibold hover:bg-teal-700 transition-colors" data-project="safe-drive">
+                            View Details
+                        </button>
+                        <span class="text-gray-500 text-sm flex items-center">
+                            Winner - Aidea Innovation Event 2025
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Project 5: Data Analysis Dashboard -->
+                <div class="project-card bg-white rounded-2xl p-8 shadow-sm border border-gray-100" data-category="data">
+                    <div class="mb-6">
+                        <div class="w-16 h-16 bg-secondary/10 rounded-xl flex items-center justify-center mb-4">
+                            <span class="text-3xl">📊</span>
+                        </div>
+                        <h3 class="font-display text-2xl font-bold text-neutral mb-3">Data Analysis Dashboard</h3>
+                        <p class="text-gray-600 mb-4">
+                            Interactive dashboard for data analysis and visualization, built during my 
+                            data science internship with real-world datasets.
+                        </p>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <h4 class="font-semibold text-neutral mb-3">Key Features:</h4>
+                        <ul class="text-gray-600 space-y-2 text-sm">
+                            <li>• Interactive data visualization</li>
+                            <li>• Automated data cleaning pipelines</li>
+                            <li>• Statistical analysis tools</li>
+                            <li>• Export capabilities</li>
+                            <li>• Real-time data updates</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-medium">Python</span>
+                        <span class="bg-secondary/10 text-secondary px-3 py-1 rounded-full text-sm font-medium">Pandas</span>
+                        <span class="bg-accent/10 text-accent px-3 py-1 rounded-full text-sm font-medium">Matplotlib</span>
+                        <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-medium">Streamlit</span>
+                    </div>
+                    
+                    <div class="flex space-x-4">
+                        <button class="view-project bg-primary text-white px-4 py-2 rounded-lg font-semibold hover:bg-teal-700 transition-colors" data-project="data-dashboard">
+                            View Details
+                        </button>
+                        <a href="#" class="border-2 border-primary text-primary px-4 py-2 rounded-lg font-semibold hover:bg-primary hover:text-white transition-colors">
+                            Demo
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 6: Portfolio Website -->
+                <div class="project-card bg-white rounded-2xl p-8 shadow-sm border border-gray-100" data-category="web">
+                    <div class="mb-6">
+                        <div class="w-16 h-16 bg-accent/10 rounded-xl flex items-center justify-center mb-4">
+                            <span class="text-3xl">💼</span>
+                        </div>
+                        <h3 class="font-display text-2xl font-bold text-neutral mb-3">Portfolio Website</h3>
+                        <p class="text-gray-600 mb-4">
+                            Personal portfolio website showcasing my skills, projects, and experience. 
+                            Built with modern web technologies and responsive design.
+                        </p>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <h4 class="font-semibold text-neutral mb-3">Key Features:</h4>
+                        <ul class="text-gray-600 space-y-2 text-sm">
+                            <li>• Responsive design</li>
+                            <li>• Interactive project showcase</li>
+                            <li>• Skills visualization</li>
+                            <li>• Contact form integration</li>
+                            <li>• Smooth animations</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-medium">HTML5</span>
+                        <span class="bg-secondary/10 text-secondary px-3 py-1 rounded-full text-sm font-medium">CSS3</span>
+                        <span class="bg-accent/10 text-accent px-3 py-1 rounded-full text-sm font-medium">JavaScript</span>
+                        <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-medium">Tailwind</span>
+                    </div>
+                    
+                    <div class="flex space-x-4">
+                        <button class="view-project bg-primary text-white px-4 py-2 rounded-lg font-semibold hover:bg-teal-700 transition-colors" data-project="portfolio">
+                            View Details
+                        </button>
+                        <span class="text-gray-500 text-sm flex items-center">
+                            You're here now! 🎉
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Timeline -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="font-display text-4xl font-bold text-neutral mb-6">Project Timeline</h2>
+                <p class="text-xl text-gray-600">The evolution of my development journey</p>
+            </div>
+            
+            <div class="relative">
+                <!-- Timeline Line -->
+                <div class="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-primary/20"></div>
+                
+                <!-- Timeline Nodes -->
+                <div class="space-y-16">
+                    <div class="timeline-node flex items-center">
+                        <div class="w-1/2 pr-8 text-right">
+                            <div class="bg-gray-50 p-6 rounded-xl">
+                                <h3 class="font-display text-xl font-bold text-neutral mb-2">Data Analysis Dashboard</h3>
+                                <p class="text-secondary font-semibold mb-2">Dec 2023 – Mar 2024</p>
+                                <p class="text-gray-600">Built during data science internship at Nexus</p>
+                            </div>
+                        </div>
+                        <div class="w-12 h-12 bg-primary rounded-full border-4 border-white shadow-lg z-10 flex items-center justify-center">
+                            <span class="text-white text-sm">📊</span>
+                        </div>
+                        <div class="w-1/2 pl-8"></div>
+                    </div>
+                    
+                    <div class="timeline-node flex items-center">
+                        <div class="w-1/2 pr-8"></div>
+                        <div class="w-12 h-12 bg-secondary rounded-full border-4 border-white shadow-lg z-10 flex items-center justify-center">
+                            <span class="text-white text-sm">🎨</span>
+                        </div>
+                        <div class="w-1/2 pl-8">
+                            <div class="bg-gray-50 p-6 rounded-xl">
+                                <h3 class="font-display text-xl font-bold text-neutral mb-2">Graphic Design Projects</h3>
+                                <p class="text-secondary font-semibold mb-2">Jul 2025 – Aug 2025</p>
+                                <p class="text-gray-600">UI/UX work during YHills internship</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-node flex items-center">
+                        <div class="w-1/2 pr-8 text-right">
+                            <div class="bg-gray-50 p-6 rounded-xl">
+                                <h3 class="font-display text-xl font-bold text-neutral mb-2">E-Learning System & Question Generator</h3>
+                                <p class="text-secondary font-semibold mb-2">Oct 2025 – Nov 2025</p>
+                                <p class="text-gray-600">Java application development phase</p>
+                            </div>
+                        </div>
+                        <div class="w-12 h-12 bg-accent rounded-full border-4 border-white shadow-lg z-10 flex items-center justify-center">
+                            <span class="text-white text-sm">☕</span>
+                        </div>
+                        <div class="w-1/2 pl-8"></div>
+                    </div>
+                    
+                    <div class="timeline-node flex items-center">
+                        <div class="w-1/2 pr-8"></div>
+                        <div class="w-12 h-12 bg-primary rounded-full border-4 border-white shadow-lg z-10 flex items-center justify-center">
+                            <span class="text-white text-sm">🛍️</span>
+                        </div>
+                        <div class="w-1/2 pl-8">
+                            <div class="bg-gray-50 p-6 rounded-xl">
+                                <h3 class="font-display text-xl font-bold text-neutral mb-2">Bridhunas Ladies Corner</h3>
+                                <p class="text-secondary font-semibold mb-2">Oct 2025 – Dec 2025</p>
+                                <p class="text-gray-600">Full-stack e-commerce development at Ediglobe</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-node flex items-center">
+                        <div class="w-1/2 pr-8 text-right">
+                            <div class="bg-gray-50 p-6 rounded-xl">
+                                <h3 class="font-display text-xl font-bold text-neutral mb-2">Safe Drive 360 & Portfolio</h3>
+                                <p class="text-secondary font-semibold mb-2">2025</p>
+                                <p class="text-gray-600">Innovation award and personal branding</p>
+                            </div>
+                        </div>
+                        <div class="w-12 h-12 bg-secondary rounded-full border-4 border-white shadow-lg z-10 flex items-center justify-center">
+                            <span class="text-white text-sm">🏆</span>
+                        </div>
+                        <div class="w-1/2 pl-8"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Modal -->
+    <div id="project-modal" class="modal">
+        <div class="modal-content p-8">
+            <div class="flex justify-between items-center mb-6">
+                <h2 id="modal-title" class="font-display text-3xl font-bold text-neutral"></h2>
+                <button id="close-modal" class="text-gray-500 hover:text-gray-700 text-2xl">×</button>
+            </div>
+            <div id="modal-content">
+                <!-- Dynamic content will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-neutral text-white py-12">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <div class="mb-8">
+                <h3 class="font-display text-2xl font-bold mb-4">Gajini Prasanth</h3>
+                <p class="text-gray-300 mb-6">Computer Science Student • Developer • Problem Solver</p>
+                <div class="flex justify-center space-x-6">
+                    <a href="mailto:gajiniprasanth291@gmail.com" class="text-gray-300 hover:text-accent transition-colors">
+                        Email
+                    </a>
+                    <a href="https://github.com" target="_blank" class="text-gray-300 hover:text-accent transition-colors">
+                        GitHub
+                    </a>
+                    <a href="https://linkedin.com" target="_blank" class="text-gray-300 hover:text-accent transition-colors">
+                        LinkedIn
+                    </a>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 pt-8">
+                <p class="text-gray-400">
+                    © 2025 Gajini Prasanth. Built with passion and code.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="main.js"></script>
+</body>
+</html>
