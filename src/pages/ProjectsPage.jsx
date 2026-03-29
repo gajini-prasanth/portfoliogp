@@ -25,7 +25,6 @@ function normalizeRepo(repo) {
     summary:
       repo.description ||
       'GitHub project repository. Open it to view implementation details and source code.',
-    impact: `Last updated ${formatDate(repo.updated_at)} · ${repo.stargazers_count} stars`,
     repoUrl: repo.html_url,
     homepage: repo.homepage,
     tags,
@@ -168,7 +167,6 @@ function ProjectsPage() {
             <h3>{project.name}</h3>
             <p className="project-subtype">{project.type}</p>
             <p>{project.summary}</p>
-            <p className="project-impact">{project.impact}</p>
             <div className="tag-row">
               {project.tags.map((tag) => (
                 <span key={tag} className="tag-chip">
